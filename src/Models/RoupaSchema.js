@@ -6,13 +6,22 @@ const roupaSchema = new mongoose.Schema({
     type: String, 
     required: [ true, 'o modelo da roupa eh obrigatório']
   },
-  cor: { type: String }, 
-  tamanho: { type: String },
-  quantidade: { type: Number },
+  cor: {
+    type: String,
+    required : [true, 'a cor da roupa eh obrigatória']
+  }, 
+  tamanho: {
+    type: String,
+    required : [true, 'o tamanho da roupa eh obrigatório']
+  },
+  quantidade: {
+    type: Number,
+    required : [true, 'a quantidade de peças eh obrigatório']
+  },
   fornecedor: {
     type: mongoose.Schema.Types.String,
     reference: 'fornecedor',
-    required: [true, 'O campo fornecedor é obrigatório']
+    required: [true, 'O campo fornecedor eh obrigatório']
   },
 }, { versionKey: false }) 
 

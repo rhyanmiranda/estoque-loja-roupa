@@ -6,7 +6,10 @@ const fornecedorSchema = new mongoose.Schema({
     type: String,
     required: [true, 'O nome do fornecedor é obrigatório']
   },
-  dataCadastro: { type: Date } 
+  dataCadastro: {
+    type: Date,
+    default: Date.now
+  } 
 },
 { versionKey: false })
 

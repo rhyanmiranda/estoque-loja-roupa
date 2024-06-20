@@ -1,3 +1,4 @@
+import fornecedores from "../Models/FornecedorSchema.js"
 import roupas from "../Models/RoupaSchema.js"
 
 class RoupaController {
@@ -16,9 +17,32 @@ class RoupaController {
 
   static cadastrarRoupa = async (req, res, next) => {
     try {
-      const novoRoupa = await roupas.create(req.body)
-      res.status(201).send({ NovaRoupa: novoRoupa })
-    }catch(erro){
+      const { modelo, cor, tamanho, quantidade, fornecedor } = req.body
+
+      const nomeFornecedor = await fornecedores.findOne({
+        nome: fornecedor
+      })
+
+      const roupaExiste = await roupas.findOne({
+        modelo,
+        cor,
+        tamanho,
+        quantidade,
+        fornecedor
+      })
+      console.log(roupaExiste)
+
+      if(roupaExiste){
+        res.status(404).send({ message: 'Essa roupa ja foi cadastrada'})
+      }
+
+      if(nomeFornecedor !== null){
+        const novoRoupa = await roupas.create(req.body)
+        res.status(201).send({ NovaRoupa: novoRoupa })
+      }else{
+        res.status(404).send({ message: 'Fornecedor informado não está cadastrado' })
+      }
+    } catch(erro){
       next(erro)
     }
   }
