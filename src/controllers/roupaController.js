@@ -30,7 +30,6 @@ class RoupaController {
         quantidade,
         fornecedor
       })
-      console.log(roupaExiste)
 
       if(roupaExiste){
         res.status(404).send({ message: 'Essa roupa ja foi cadastrada'})
