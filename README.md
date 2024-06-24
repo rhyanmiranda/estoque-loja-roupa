@@ -1,33 +1,25 @@
 Projeto de uma Loja de Roupas - Estoque
 
-Operações:
-Listar todas as roupas
+- Operações:
+  - Listar todas as roupa
+  - Cadastrar uma nova roupa
+  - Atualizar dados de uma roupa ( pelo id )
+  - Deletar uma roupa ( pelo id )
+  - Listar todos os fornecedores
+  - Cadastrar um novo fornecedor
+  - Atualizar dados de um fornecedor ( pelo id )
+  - Deletar um fornecedor ( pelo id )
 
-Cadastrar uma nova roupa
+- Model Roupa
+> id, modelo, cor, tamanho, quantidade, fornecedora
 
-Atualizar dados de uma roupa ( pelo id )
+- Model Fornecedora
+>id, nome, dataCadastro(atual)
 
-Deletar uma roupa ( pelo id )
+- Ferramentas
+  - Express
+  - MongoDB ( mongoose )
+  - Models, Controllers e Routes
+ 
 
-Listar todos os fornecedores
-
-Cadastrar um novo fornecedor
-
-Atualizar dados de um fornecedor ( pelo id )
-
-Deletar um fornecedor ( pelo id )
-
-Model Peca
-
-id, modelo, cor, tamanho, quantidade, fornecedora
-Model Fornecedora
-
-id, nome, dataCadastro*
--> Ferramentas
-
-Express
-MongoDB ( mongoose )
-Models, Controllers e Routes
-Tratamento de Erros
-Filtros
-Paginação
+-> Tratamento de Erros - Filtros - Paginação

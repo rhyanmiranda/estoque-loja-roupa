@@ -16,21 +16,34 @@ class FornecedorController {
 
     static cadastrarFornecedores = async (req, res, next) => {
       try {
-        const novoFornecedor = await fornecedores.create(req.body)
-        res.status(201).send({
-          message: 'Fornecedor cadastrado com sucesso',
-          fornecedor: novoFornecedor
+        const nomeFornecedor = req.body.nome
+        const dadosFornecedor = await fornecedores.findOne({
+          nome: nomeFornecedor
         })
-      }catch(erro) {
-        next(erro)
+
+        if(dadosFornecedor === null){
+          const novoFornecedor = await fornecedores.create(req.body)
+            res.status(201).send({
+              message: 'Fornecedor cadastrado com sucesso',
+              fornecedor: novoFornecedor
+          })
+        } else {
+            res.status(400).send({
+            message: 'Fornecedor já existe'
+          })
+        }
+      } catch(erro) {
+          next(erro)
       }
     }
 
     static atualizarFornecedor = async (req, res, next) => {
       try {
         const { id } = req.params
-        const atualizarFornecedor = await fornecedores.findByIdAndUpdate(id, req.body)
-        res.status(200).send({message: 'Dados Atualizados'})
+        await fornecedores.findByIdAndUpdate(id, req.body)
+        res.status(200).send({
+          message: 'Dados Atualizados'
+        })
       }catch(erro){
         next(erro)
       }
@@ -38,12 +51,11 @@ class FornecedorController {
 
     static deletarFornecedor = async (req, res, next) => {
       try{
-        const { id } = req.params
+        const id = req.params.id
         const deletaFornecedor = await fornecedores.findByIdAndDelete(id)
-        const fornecedor = await fornecedores.findById(id)
         res.status(200).send({
           message: 'Fornecedor deletado com sucesso',
-          fornecedor: fornecedor.nome
+          fornecedor: deletaFornecedor.nome
         })
       }catch(erro) {
         next(erro)
